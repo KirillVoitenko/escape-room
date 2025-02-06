@@ -1,12 +1,17 @@
 import { Classed } from '@shared/model';
 import classNames from 'classnames';
-import { ReactNode } from 'react';
+import { JSX } from 'react';
 
 type SpinnerProps = Classed<{
   isActive: boolean;
 }>
 
-export function Spinner({ className, isActive }: SpinnerProps): ReactNode {
+export function Spinner({ className, isActive }: SpinnerProps): JSX.Element {
   const spinnerClassName = classNames('loader-spin', className);
-  return isActive && <div className={spinnerClassName} />;
+  return (
+    // eslint-disable-next-line react/jsx-no-useless-fragment
+    <>
+      {isActive && <div className={spinnerClassName} />}
+    </>
+  );
 }

@@ -3,23 +3,27 @@ import { Layout } from '@widgets/layout';
 import { QuestPreviewImage } from '@shared/ui/quest-preview-image';
 import { AdaptiveContainer } from '@shared/ui/adaptive-container';
 import { LoginForm } from '@features/login-form';
-import { AuthorizationData, useAuthorization } from '@entities/user';
+import { AuthorizationData, AuthorizationStatusEnum, useAuthorization } from '@entities/user';
 import { PAGE_TITLE, PREVIEW_ATTRIBUTES } from '@pages/login-page/config';
 import { useNavigate, useSearchParams } from 'react-router-dom';
-import { RoutesEnum } from '@shared/model';
+import { RootState, RoutesEnum } from '@shared/model';
 import { SearchParamsNames } from '@shared/config';
 import { withBrowserTitle } from '@shared/lib/hocs/with-browser-title';
+import { useStore } from 'react-redux';
 
 
 function LoginPage(): JSX.Element {
   const [searchParams] = useSearchParams();
+  const store = useStore<RootState>();
   const { login } = useAuthorization();
   const navigate = useNavigate();
 
   const formSubmitHandler = async (data: AuthorizationData) => {
     const returnUrl = searchParams.get(SearchParamsNames.ReturnUrl);
     await login(data);
-    navigate(returnUrl ?? RoutesEnum.Main, { replace: true });
+    if (store.getState().authorization.status === AuthorizationStatusEnum.Authorized) {
+      navigate(returnUrl ?? RoutesEnum.Main, { replace: true });
+    }
   };
 
   return (

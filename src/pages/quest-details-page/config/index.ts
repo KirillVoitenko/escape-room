@@ -1,5 +1,11 @@
-import { PAGE_TITLE } from './const';
+import {
+  PAGE_TITLE,
+  LEVEL_TAG_SIZE,
+  PERSON_TAG_SIZE
+} from './const';
 
 export {
-  PAGE_TITLE
+  PAGE_TITLE,
+  LEVEL_TAG_SIZE,
+  PERSON_TAG_SIZE
 };

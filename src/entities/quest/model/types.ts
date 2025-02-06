@@ -30,7 +30,7 @@ export enum QuestLevelCaption {
   Hard = 'сложный'
 }
 
-export type Quest = {
+export interface Quest {
   id: string;
   title: string;
   previewImg: string;
@@ -38,6 +38,12 @@ export type Quest = {
   level: QuestLevel;
   type: QuestType;
   peopleMinMax: [number, number];
+}
+
+export interface QuestExtended extends Quest {
+  description: string;
+  coverImg: string;
+  coverImgWebp: string;
 }
 
 export interface QuestTagInfo {

@@ -1,5 +1,10 @@
 import { QuestCard } from './ui/quest-card';
 import { QuestTag } from './ui/quest-tag';
+import { useQuestQuery } from './lib/use-quest-query';
+import {
+  createLevelTagInfo,
+  createPersonTagInfo
+} from './lib/create-tag-info';
 import {
   fetchMainQuestsListAction,
   mainQuestsListReducer,
@@ -9,7 +14,8 @@ import {
   QuestLevel,
   QuestType,
   QuestLevelCaption,
-  QuestTypeCaption
+  QuestTypeCaption,
+  QuestExtended
 } from './model';
 import {
   questLevelToDescriptionMap,
@@ -17,7 +23,8 @@ import {
 } from './config';
 
 export type {
-  Quest
+  Quest,
+  QuestExtended
 };
 
 export {
@@ -32,5 +39,8 @@ export {
   mainQuestsLoadingSelector,
   mainQuestsListSelector,
   questLevelToDescriptionMap,
-  questTypeToDescriptionMap
+  questTypeToDescriptionMap,
+  useQuestQuery,
+  createLevelTagInfo,
+  createPersonTagInfo
 };

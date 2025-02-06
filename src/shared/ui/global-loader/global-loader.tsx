@@ -2,7 +2,7 @@ import { RootState } from '@shared/model';
 import { globalLoaderSelector } from '@shared/model';
 import { Spinner } from '@shared/ui/spinner';
 import classNames from 'classnames';
-import { ReactNode } from 'react';
+import { JSX } from 'react';
 import { useAppSelector } from '@shared/lib/redux';
 
 type Selector = (state: RootState) => boolean;
@@ -17,7 +17,7 @@ export function GlobalLoader({
   className,
   authorizationLoadingSelector,
   mainQuestsLoadingSelector,
-}: GlobalLoaderProps): ReactNode {
+}: GlobalLoaderProps): JSX.Element {
   const innerLoading = useAppSelector(globalLoaderSelector);
   const authLoading = useAppSelector(authorizationLoadingSelector);
   const mainLoading = useAppSelector(mainQuestsLoadingSelector);

@@ -4,7 +4,8 @@ import {
   QuestLevel,
   QuestType,
   QuestLevelCaption,
-  QuestTypeCaption
+  QuestTypeCaption,
+  QuestExtended
 } from './types';
 import {
   fetchMainQuestsListAction,
@@ -16,6 +17,7 @@ import {
 export type {
   Quest,
   QuestTagInfo,
+  QuestExtended
 };
 
 export {
