@@ -8,5 +8,5 @@ export {
   UserInfo,
   useAuthorization,
   authorizationLoadingSelector,
-  AuthorizationStatusEnum
+  AuthorizationStatusEnum,
 };

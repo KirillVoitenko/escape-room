@@ -1,5 +1,5 @@
 import { JSX } from 'react';
-import { type AuthorizationData } from '@entities/user';
+import type { AuthorizationData } from '@entities/user';
 import { Classed } from '@shared/model';
 import classNames from 'classnames';
 import { useForm } from 'react-hook-form';

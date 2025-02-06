@@ -1,8 +1,11 @@
-import { useAuthorization } from '@entities/user';
+import { AuthorizationStatusEnum, useAuthorization } from '@entities/user';
 import { useEffect } from 'react';
+import { useAppDispatch } from '@shared/lib/redux';
+import { fetchMainQuestsListAction } from '@entities/quest';
 
 export const useStartup = () => {
-  const { checkAuthorization } = useAuthorization();
+  const { checkAuthorization, status } = useAuthorization();
+  const dispatch = useAppDispatch();
 
   useEffect(
     () => {
@@ -21,5 +24,26 @@ export const useStartup = () => {
       };
     },
     [checkAuthorization]
+  );
+
+  useEffect(
+    () => {
+      let componentIsRendered = false;
+
+      const runListsFetch = async () => {
+        if (!componentIsRendered) {
+          await Promise.all([
+            status !== AuthorizationStatusEnum.Unknown ? dispatch(fetchMainQuestsListAction()) : Promise.resolve()
+          ]);
+        }
+      };
+
+      runListsFetch();
+
+      return () => {
+        componentIsRendered = true;
+      };
+    },
+    [dispatch, status]
   );
 };

@@ -1,5 +1,6 @@
-import { PREVIEW_ATTRIBUTES } from './const';
+import { PREVIEW_ATTRIBUTES, PAGE_TITLE } from './const';
 
 export {
-  PREVIEW_ATTRIBUTES
+  PREVIEW_ATTRIBUTES,
+  PAGE_TITLE
 };

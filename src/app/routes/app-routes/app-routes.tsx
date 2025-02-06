@@ -4,9 +4,12 @@ import { RoutesEnum } from '@shared/model';
 import { PageLayout } from '../page-layout';
 import { AuthorizationStatusEnum, useAuthorization } from '@entities/user';
 import { PrivateRoute } from '../private-route';
+import { Fallback } from '../fallback';
 
 const LoginPage = lazy(() => import('@pages/login-page'));
 const NotFoundPage = lazy(() => import('@pages/not-found-page'));
+const MainPage = lazy(() => import('@pages/main-page'));
+const QuestDetailsPage = lazy(() => import('@pages/quest-details-page'));
 
 export function AppRoutes(): JSX.Element {
   const { status } = useAuthorization();
@@ -18,7 +21,11 @@ export function AppRoutes(): JSX.Element {
       >
         <Route
           index
-          element={<p>Main page</p>}
+          element={
+            <Suspense fallback={<Fallback />}>
+              <MainPage />
+            </Suspense>
+          }
         />
         <Route
           path={RoutesEnum.Login}
@@ -27,7 +34,7 @@ export function AppRoutes(): JSX.Element {
               isPrivate={status !== AuthorizationStatusEnum.Authorized}
               redirectPath={RoutesEnum.Main}
             >
-              <Suspense>
+              <Suspense fallback={<Fallback />}>
                 <LoginPage />
               </Suspense>
             </PrivateRoute>
@@ -39,7 +46,11 @@ export function AppRoutes(): JSX.Element {
         />
         <Route
           path={RoutesEnum.Quest}
-          element={<p>Quest details page</p>}
+          element={
+            <Suspense fallback={<Fallback />}>
+              <QuestDetailsPage />
+            </Suspense>
+          }
         />
         <Route
           path={RoutesEnum.Booking}

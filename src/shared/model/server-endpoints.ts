@@ -1,4 +1,5 @@
 export enum ServerEndpoints {
   Login = '/login',
-  Logout = '/logout'
+  Logout = '/logout',
+  Quests = '/quest'
 }

@@ -3,11 +3,24 @@ import { Layout } from '@widgets/layout';
 import { QuestPreviewImage } from '@shared/ui/quest-preview-image';
 import { AdaptiveContainer } from '@shared/ui/adaptive-container';
 import { LoginForm } from '@features/login-form';
-import { useAuthorization } from '@entities/user';
-import { PREVIEW_ATTRIBUTES } from '@pages/login-page/config';
+import { AuthorizationData, useAuthorization } from '@entities/user';
+import { PAGE_TITLE, PREVIEW_ATTRIBUTES } from '@pages/login-page/config';
+import { useNavigate, useSearchParams } from 'react-router-dom';
+import { RoutesEnum } from '@shared/model';
+import { SearchParamsNames } from '@shared/config';
+import { withBrowserTitle } from '@shared/lib/hocs/with-browser-title';
 
-export function LoginPage(): JSX.Element {
+
+function LoginPage(): JSX.Element {
+  const [searchParams] = useSearchParams();
   const { login } = useAuthorization();
+  const navigate = useNavigate();
+
+  const formSubmitHandler = async (data: AuthorizationData) => {
+    const returnUrl = searchParams.get(SearchParamsNames.ReturnUrl);
+    await login(data);
+    navigate(returnUrl ?? RoutesEnum.Main, { replace: true });
+  };
 
   return (
     <Layout.Content className='decorated-page login'>
@@ -20,9 +33,11 @@ export function LoginPage(): JSX.Element {
       </div>
       <AdaptiveContainer>
         <div className='login__form'>
-          <LoginForm onSubmit={login} />
+          <LoginForm onSubmit={formSubmitHandler} />
         </div>
       </AdaptiveContainer>
     </Layout.Content>
   );
 }
+
+export const LoginPageWithTitle = withBrowserTitle(LoginPage, PAGE_TITLE);

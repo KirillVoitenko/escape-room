@@ -11,6 +11,7 @@ import { ToastContainer } from 'react-toastify';
 import { useStartup } from '@app/startup';
 import { GlobalLoader } from '@shared/ui/global-loader';
 import { authorizationLoadingSelector } from '@entities/user';
+import { mainQuestsLoadingSelector } from '@entities/quest';
 
 export function Application(): JSX.Element {
   useStartup();
@@ -25,6 +26,7 @@ export function Application(): JSX.Element {
       />
       <GlobalLoader
         authorizationLoadingSelector={authorizationLoadingSelector}
+        mainQuestsLoadingSelector={mainQuestsLoadingSelector}
       />
       <RouterProvider />
     </>

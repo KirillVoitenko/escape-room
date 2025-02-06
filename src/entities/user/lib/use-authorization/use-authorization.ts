@@ -1,10 +1,10 @@
-import { AuthorizationStatusEnum, AuthorizationData, UserInfo } from '@entities/user/model';
+import { AuthorizationData, AuthorizationStatusEnum, UserInfo } from '@entities/user/model';
 import {
   authorizationStatusSelector,
   authorizedUserSelector,
   checkAuthorizationAction,
   loginAction,
-  logoutAction
+  logoutAction,
 } from '@entities/user/model/authorization';
 import { useAppDispatch, useAppSelector } from '@shared/lib/redux';
 import { Nullable } from '@shared/model';

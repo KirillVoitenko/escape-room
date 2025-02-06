@@ -42,14 +42,10 @@ export const loginAction = createAsyncThunk<
   }
 >(
   AuthorizationActions.Login,
-  async (authData, { extra: apiInstance, dispatch }) => {
+  async (authData, { extra: apiInstance }) => {
     tokenServiceInstance.authorizationToken.clear();
     const { data } = await apiInstance.post<UserCheckResult>(ServerEndpoints.Login, authData);
     tokenServiceInstance.authorizationToken.set(data.token);
-    dispatch(redirectToRouteAction({
-      route: RoutesEnum.Main,
-      replace: true
-    }));
     return {
       email: data.email
     };

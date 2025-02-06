@@ -10,19 +10,22 @@ type Selector = (state: RootState) => boolean;
 type GlobalLoaderProps = {
   className?: string;
   authorizationLoadingSelector: Selector;
+  mainQuestsLoadingSelector: Selector;
 }
 
 export function GlobalLoader({
   className,
   authorizationLoadingSelector,
+  mainQuestsLoadingSelector,
 }: GlobalLoaderProps): ReactNode {
   const innerLoading = useAppSelector(globalLoaderSelector);
   const authLoading = useAppSelector(authorizationLoadingSelector);
+  const mainLoading = useAppSelector(mainQuestsLoadingSelector);
   /*const favoritesLoading = useAppSelector(favoritesOffersLoadingSelector);
   const mainLoading = useAppSelector(mainOffersLoadingSelector);
   const offerPageLoading = useAppSelector(offerPageLoadingSelector);*/
 
-  const loading = innerLoading || authLoading;
+  const loading = innerLoading || authLoading || mainLoading;
 
   const loaderClassName = classNames(
     'loader-container',
@@ -32,7 +35,7 @@ export function GlobalLoader({
     className
   );
   return (
-    <div className={loaderClassName} data-testid='global-loader-container'>
+    <div className={loaderClassName}>
       <Spinner isActive={loading} />
     </div>
   );

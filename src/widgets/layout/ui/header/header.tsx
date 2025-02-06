@@ -1,16 +1,15 @@
 import { Classed } from '@shared/model';
 import { AdaptiveContainer } from '@shared/ui/adaptive-container';
 import classNames from 'classnames';
-import { JSX, PropsWithChildren } from 'react';
+import { JSX, PropsWithChildren, ReactNode } from 'react';
 import { Logo } from '../logo';
 import { PhoneLink } from '@shared/ui/phone-link';
-import { AuthorizationLink } from '../authorization-link';
 
 type HeaderProps = Classed<PropsWithChildren<{
-  showAuthLink?: boolean;
+  authLink?: ReactNode;
 }>>
 
-export function Header({ className, showAuthLink = true, children }: HeaderProps): JSX.Element {
+export function Header({ className, authLink, children }: HeaderProps): JSX.Element {
   const headerClassName = classNames(
     'header',
     {
@@ -23,7 +22,7 @@ export function Header({ className, showAuthLink = true, children }: HeaderProps
         <Logo />
         {children}
         <div className='header__side-nav'>
-          {showAuthLink && <AuthorizationLink />}
+          {authLink}
           <PhoneLink className='link header__side-item header__phone-link' phone='88003335599' />
         </div>
       </AdaptiveContainer>
