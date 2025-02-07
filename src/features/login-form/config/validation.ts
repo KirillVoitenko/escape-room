@@ -1,5 +1,5 @@
-import { AuthorizationData } from '@entities/user';
-import { ObjectSchema, object, string } from 'yup';
+import { ObjectSchema, object, string, boolean } from 'yup';
+import { LoginFormData } from '../model';
 
 const REQUIRED_FIELD_ERROR_MESSAGE = 'Поле обязательно для заполнения';
 const PASSWORD_VALIDATION_SETTINGS = {
@@ -8,11 +8,13 @@ const PASSWORD_VALIDATION_SETTINGS = {
   max: 15
 };
 
-export const VALIDATION_SCHEMA: ObjectSchema<AuthorizationData> = object({
+export const VALIDATION_SCHEMA: ObjectSchema<LoginFormData> = object({
   email: string().email('Введите корректный email')
     .required(REQUIRED_FIELD_ERROR_MESSAGE),
   password: string().min(PASSWORD_VALIDATION_SETTINGS.min, `Минимальная длина - ${PASSWORD_VALIDATION_SETTINGS.min} символа`)
     .max(PASSWORD_VALIDATION_SETTINGS.max, `Минимальная длина - ${PASSWORD_VALIDATION_SETTINGS.max} символов`)
     .matches(PASSWORD_VALIDATION_SETTINGS.pattern, 'Минимум 1 буква и цифра')
-    .required(REQUIRED_FIELD_ERROR_MESSAGE)
+    .required(REQUIRED_FIELD_ERROR_MESSAGE),
+  personalAgreementConfirm: boolean().required(REQUIRED_FIELD_ERROR_MESSAGE)
+    .isTrue(REQUIRED_FIELD_ERROR_MESSAGE)
 });

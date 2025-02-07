@@ -1,10 +1,11 @@
 import { combineReducers } from '@reduxjs/toolkit';
 import { authorizationReducer } from '@entities/user';
 import { globalLoaderReducer } from '@shared/model';
-import { mainQuestsListReducer } from '@entities/quest';
+import { mainQuestsListReducer, questExtendedReducer } from '@entities/quest';
 
 export const rootReducer = combineReducers({
   authorization: authorizationReducer,
   loading: globalLoaderReducer,
-  mainQuests: mainQuestsListReducer
+  mainQuests: mainQuestsListReducer,
+  questExtended: questExtendedReducer,
 });

@@ -1,13 +1,14 @@
-import { QuestLevel, QuestType } from '@entities/quest';
-import { ElementSize, Nullable } from '@shared/model';
+import { ElementSize, Nullable, QuestLevel, QuestType } from '@shared/model';
 import { BaseFilterItemConfig } from '@shared/ui/filter-panel';
 
-export interface GenreFilterItemConfig extends BaseFilterItemConfig<Nullable<QuestType>> {
+export type BaseQuestFilterItemConfig<TValueType> = BaseFilterItemConfig<Nullable<TValueType>>;
+
+export interface GenreFilterItemConfig extends BaseQuestFilterItemConfig<QuestType> {
   iconId: string;
   iconSize: ElementSize;
 }
 
-export type LevelFilterItemConfig = BaseFilterItemConfig<Nullable<QuestLevel>>;
+export type LevelFilterItemConfig = BaseQuestFilterItemConfig<QuestLevel>;
 
 export enum GenreFilterItemsId {
   All = 'all',

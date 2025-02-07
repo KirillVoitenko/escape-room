@@ -26,9 +26,11 @@ export function useQuestQuery<TDataType>(questQuery: () => Promise<TDataType>): 
             const queryResult = await questQuery();
             setData(queryResult);
           } catch (err) {
-            if (err instanceof AxiosError && err?.response?.status === StatusCodes.NOT_FOUND) {
-              navigate(RoutesEnum.NotDefined, { replace: true });
-            }
+            const hasNotFoundError = err instanceof AxiosError && err?.response?.status === StatusCodes.NOT_FOUND;
+            navigate(
+              hasNotFoundError ? RoutesEnum.NotFound : RoutesEnum.Error,
+              { replace: true }
+            );
           } finally {
             dispatch(setLoadingAction(false));
           }

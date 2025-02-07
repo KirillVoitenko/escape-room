@@ -11,7 +11,6 @@ export interface BaseFilterItemConfig<TFilterValueType> {
 
 export type RenderItemProp<TFilterValueType, TFilterConfig extends BaseFilterItemConfig<TFilterValueType>> = (
   config: TFilterConfig,
-  onFilterChange: (value: TFilterValueType) => void,
   isActive: boolean
 ) => JSX.Element;
 

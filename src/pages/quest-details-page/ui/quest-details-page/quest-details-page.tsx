@@ -1,12 +1,11 @@
-import { useQuestQuery, type QuestExtended } from '@entities/quest';
+import { fetchQuestExtendedAction, questExtendedDataSelector } from '@entities/quest';
 import { PAGE_TITLE } from '@pages/quest-details-page/config';
-import { getApiInstance } from '@shared/lib/api-instance';
 import { withBrowserTitle } from '@shared/lib/hocs/with-browser-title';
-import { ServerEndpoints } from '@shared/model';
 import { Layout } from '@widgets/layout';
-import { JSX, useCallback } from 'react';
-import { generatePath, useParams } from 'react-router-dom';
+import { JSX, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import { QuestInfo } from '../quest-info';
+import { useAppDispatch, useAppSelector } from '@shared/lib/redux';
 
 type PageUrlParams = {
   id: string;
@@ -14,25 +13,31 @@ type PageUrlParams = {
 
 function QuestDetailsPage(): JSX.Element {
   const { id } = useParams<PageUrlParams>();
+  const dispatch = useAppDispatch();
+  const quest = useAppSelector(questExtendedDataSelector);
 
-  const fetchQuestInfo = useCallback(
-    async (): Promise<QuestExtended> => {
-      if (id) {
-        const questInfoUrl = generatePath(ServerEndpoints.QuestExtended, { questId: id });
-        const result = await getApiInstance().get<QuestExtended>(questInfoUrl);
-        return result.data;
-      }
+  useEffect(
+    () => {
+      let componentIsRendered = false;
 
-      throw new Error('No find \'id\' parameter in URL');
+      const runFetchQuestInfo = async () => {
+        if (id && quest?.id !== id && !componentIsRendered) {
+          await dispatch(fetchQuestExtendedAction(id));
+        }
+      };
+
+      runFetchQuestInfo();
+
+      return () => {
+        componentIsRendered = true;
+      };
     },
-    [id]
+    [dispatch, id, quest?.id]
   );
-
-  const { data } = useQuestQuery(fetchQuestInfo);
 
   return (
     <Layout.Content className='decorated-page quest-page'>
-      {data && <QuestInfo quest={data} />}
+      {quest && <QuestInfo quest={quest} />}
     </Layout.Content>
   );
 }

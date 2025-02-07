@@ -1,9 +1,10 @@
-import { QuestType, QuestLevel, QuestLevelCaption, QuestTypeCaption } from '@entities/quest';
+import { QuestLevelCaption, QuestTypeCaption } from '@entities/quest';
 import type {
   GenreFilterItemConfig,
   LevelFilterItemConfig
 } from '../model';
 import { GenreFilterItemsId, LevelFilterItemsId } from '../model';
+import { QuestLevel, QuestType } from '@shared/model';
 
 enum InputNames {
   Type = 'type',

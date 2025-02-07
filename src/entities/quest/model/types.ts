@@ -1,18 +1,4 @@
-import { BaseFetchedState } from '@shared/model';
-
-export enum QuestLevel {
-  Easy = 'easy',
-  Medium = 'medium',
-  Hard = 'hard'
-}
-
-export enum QuestType {
-  Adventures = 'adventures',
-  Horror = 'horror',
-  Mystic = 'mystic',
-  Detective = 'detective',
-  SciFi = 'sci-fi'
-}
+import { BaseFetchedState, QuestLevel, QuestType } from '@shared/model';
 
 export enum QuestTypeCaption {
   All = 'Все квесты',
@@ -24,10 +10,10 @@ export enum QuestTypeCaption {
 }
 
 export enum QuestLevelCaption {
-  All = 'любой',
-  Easy = 'лёгкий',
-  Medium = 'средний',
-  Hard = 'сложный'
+  All = 'Любой',
+  Easy = 'Лёгкий',
+  Medium = 'Средний',
+  Hard = 'Сложный'
 }
 
 export interface Quest {

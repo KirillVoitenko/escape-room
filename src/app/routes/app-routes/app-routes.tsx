@@ -10,6 +10,8 @@ const LoginPage = lazy(() => import('@pages/login-page'));
 const NotFoundPage = lazy(() => import('@pages/not-found-page'));
 const MainPage = lazy(() => import('@pages/main-page'));
 const QuestDetailsPage = lazy(() => import('@pages/quest-details-page'));
+const AboutPage = lazy(() => import('@pages/about-page'));
+const QuestBookingPage = lazy(() => import('@pages/quest-booking-page'));
 
 export function AppRoutes(): JSX.Element {
   const { status } = useAuthorization();
@@ -42,7 +44,11 @@ export function AppRoutes(): JSX.Element {
         />
         <Route
           path={RoutesEnum.About}
-          element={<p>About page</p>}
+          element={
+            <Suspense fallback={<Fallback />}>
+              <AboutPage />
+            </Suspense>
+          }
         />
         <Route
           path={RoutesEnum.Quest}
@@ -59,7 +65,9 @@ export function AppRoutes(): JSX.Element {
               isPrivate={status === AuthorizationStatusEnum.Authorized}
               redirectPath={RoutesEnum.Login}
             >
-              <p>Quest booking page</p>
+              <Suspense fallback={<Fallback />}>
+                <QuestBookingPage />
+              </Suspense>
             </PrivateRoute>
           }
         />
@@ -75,7 +83,7 @@ export function AppRoutes(): JSX.Element {
           }
         />
         <Route
-          path={RoutesEnum.NotFound}
+          path={RoutesEnum.All}
           element={
             <Suspense>
               <NotFoundPage />

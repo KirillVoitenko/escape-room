@@ -1,17 +1,28 @@
 import { ForwardedRef, forwardRef, HTMLInputTypeAttribute, JSX, PropsWithChildren } from 'react';
 import type { UseFormRegisterReturn } from 'react-hook-form';
 import classNames from 'classnames';
+import { Classed } from '@shared/model';
 
-type LoginFormInputProps = PropsWithChildren<Omit<UseFormRegisterReturn, 'ref'> & {
+type TextInputProps = Classed<PropsWithChildren<Omit<UseFormRegisterReturn, 'ref'> & {
   type: HTMLInputTypeAttribute;
   placeholder?: string;
   caption: string;
   hasError: boolean;
-}>;
+}>>;
 
-export const LoginFormInput = forwardRef(({ name, type, caption, hasError, placeholder, children, ...otherProps }: LoginFormInputProps, ref: ForwardedRef<HTMLInputElement>): JSX.Element => {
+export const TextInput = forwardRef(({
+  className,
+  name,
+  type,
+  caption,
+  hasError,
+  placeholder,
+  children,
+  ...otherProps
+}: TextInputProps, ref: ForwardedRef<HTMLInputElement>): JSX.Element => {
   const inputContainerClassName = classNames(
-    'custom-input login-form__input',
+    'custom-input',
+    className,
     {
       'is-invalid': hasError
     }
@@ -25,4 +36,4 @@ export const LoginFormInput = forwardRef(({ name, type, caption, hasError, place
   );
 });
 
-LoginFormInput.displayName = 'LoginFormInput';
+TextInput.displayName = 'TextInputWithForwerdedRef';

@@ -1,7 +1,6 @@
+import { QuestLevel, QuestType } from '@shared/model';
 import {
-  QuestLevel,
   QuestLevelCaption,
-  QuestType,
   QuestTypeCaption,
 } from '../model';
 

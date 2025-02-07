@@ -11,11 +11,13 @@ import {
   mainQuestsListSelector,
   mainQuestsLoadingSelector,
   Quest,
-  QuestLevel,
-  QuestType,
   QuestLevelCaption,
   QuestTypeCaption,
-  QuestExtended
+  QuestExtended,
+  fetchQuestExtendedAction,
+  questExtendedReducer,
+  questExtendedDataSelector,
+  questExtendedLoadingSelector
 } from './model';
 import {
   questLevelToDescriptionMap,
@@ -28,8 +30,6 @@ export type {
 };
 
 export {
-  QuestLevel,
-  QuestType,
   QuestLevelCaption,
   QuestTypeCaption,
   QuestCard,
@@ -42,5 +42,9 @@ export {
   questTypeToDescriptionMap,
   useQuestQuery,
   createLevelTagInfo,
-  createPersonTagInfo
+  createPersonTagInfo,
+  fetchQuestExtendedAction,
+  questExtendedReducer,
+  questExtendedDataSelector,
+  questExtendedLoadingSelector
 };

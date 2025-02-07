@@ -1,12 +1,11 @@
 import { JSX, useState } from 'react';
 import { useAppSelector } from '@shared/lib/redux';
-import { mainQuestsListSelector, QuestLevel, QuestType } from '@entities/quest';
+import { mainQuestsListSelector } from '@entities/quest';
 import { MainQuestsList } from '@features/main-quests-list';
-import { Nullable } from '@shared/model';
+import { Nullable, QuestLevel, QuestType } from '@shared/model';
 import { FilterPanel } from '@shared/ui/filter-panel';
 import { EmptyQuestsMessage, GENRE_FILTER_ITEMS_CONFIG, LEVEL_FILTER_ITEMS_CONFIG } from '@widgets/main-quests-list-with-filters/config';
-import { GenreFilterItem } from '../genre-filter-item';
-import { LevelFilterItem } from '../level-filter-item';
+import { FilterItem } from '../filter-item';
 import { MessageBlock } from '@shared/ui/message-block';
 
 export function MainQuestsListWithFilters(): JSX.Element {
@@ -31,9 +30,18 @@ export function MainQuestsListWithFilters(): JSX.Element {
               <FilterPanel
                 activeFilter={genreFilter}
                 items={GENRE_FILTER_ITEMS_CONFIG}
-                onFilterChange={setGenreFilter}
-                renderItem={(config, filterChangeHandler, isActive) => (
-                  <GenreFilterItem key={config.id} config={config} onFilterChange={filterChangeHandler} isActive={isActive} />
+                renderItem={(config, isActive) => (
+                  <FilterItem
+                    key={config.id}
+                    config={config}
+                    onFilterChange={setGenreFilter}
+                    isActive={isActive}
+                    icon={(
+                      <svg className='filter__icon' width={config.iconSize.width} height={config.iconSize.height}>
+                        <use xlinkHref={config.iconId} />
+                      </svg>
+                    )}
+                  />
                 )}
               />
             </fieldset>
@@ -42,9 +50,8 @@ export function MainQuestsListWithFilters(): JSX.Element {
               <FilterPanel
                 activeFilter={levelFilter}
                 items={LEVEL_FILTER_ITEMS_CONFIG}
-                onFilterChange={setLevelFilter}
-                renderItem={(config, filterChangeHandler, isActive) => (
-                  <LevelFilterItem key={config.id} config={config} onFilterChange={filterChangeHandler} isActive={isActive} />
+                renderItem={(config, isActive) => (
+                  <FilterItem key={config.id} config={config} onFilterChange={setLevelFilter} isActive={isActive} />
                 )}
               />
             </fieldset>

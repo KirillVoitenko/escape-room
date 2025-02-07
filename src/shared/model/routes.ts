@@ -5,6 +5,7 @@ export enum RoutesEnum {
   Quest = '/quest/:id',
   Booking = '/quest/:id/booking',
   UserQuests = '/my-quests',
-  NotDefined = '/not-defined',
-  NotFound = '*'
+  Error = '/error',
+  NotFound = '/404',
+  All = '*'
 }

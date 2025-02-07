@@ -1,8 +1,6 @@
 import {
   Quest,
   QuestTagInfo,
-  QuestLevel,
-  QuestType,
   QuestLevelCaption,
   QuestTypeCaption,
   QuestExtended
@@ -13,6 +11,12 @@ import {
   mainQuestsListSelector,
   mainQuestsLoadingSelector,
 } from './main-quests-list-slice';
+import {
+  questExtendedReducer,
+  fetchQuestExtendedAction,
+  questExtendedDataSelector,
+  questExtendedLoadingSelector
+} from './quest-extended-slice';
 
 export type {
   Quest,
@@ -21,12 +25,14 @@ export type {
 };
 
 export {
-  QuestLevel,
-  QuestType,
   QuestLevelCaption,
   QuestTypeCaption,
   fetchMainQuestsListAction,
+  fetchQuestExtendedAction,
+  questExtendedReducer,
   mainQuestsListReducer,
   mainQuestsListSelector,
-  mainQuestsLoadingSelector
+  mainQuestsLoadingSelector,
+  questExtendedDataSelector,
+  questExtendedLoadingSelector
 };

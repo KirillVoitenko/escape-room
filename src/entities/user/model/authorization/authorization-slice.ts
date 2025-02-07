@@ -25,7 +25,6 @@ const authorizationSlice = createSlice({
   extraReducers(builder) {
     builder.addCase(checkAuthorizationAction.pending, (state) => {
       state.loading = true;
-      state.status = AuthorizationStatusEnum.Unknown;
       state.user = null;
     });
     builder.addCase(checkAuthorizationAction.rejected, (state) => {

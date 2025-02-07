@@ -1,6 +1,7 @@
-import { AuthorizationData } from '@entities/user';
+import { LoginFormData } from '../model';
 
-export const INITIAL_FORM_VALUES: AuthorizationData = {
+export const INITIAL_FORM_VALUES: LoginFormData = {
   email: '',
   password: '',
+  personalAgreementConfirm: false
 };

@@ -31,7 +31,7 @@ export function QuestInfo({ quest }: QuestInfoProps): JSX.Element {
 
   return (
     <>
-      <div className='decorated-page__decor' aria-hidden="true">
+      <div className='decorated-page__decor' aria-hidden>
         <QuestPreviewImage
           alt={quest.title}
           src={quest.coverImg}
