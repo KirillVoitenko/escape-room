@@ -3,7 +3,6 @@ import type {
   QuestBookingInfo,
   QuestBookingSlot,
   UserBooking,
-  UserBookingQuestInfo
 } from './types';
 import { BookingDate } from './types';
 
@@ -13,5 +12,4 @@ export {
   QuestBookingInfo,
   QuestBookingSlot,
   UserBooking,
-  UserBookingQuestInfo
 };

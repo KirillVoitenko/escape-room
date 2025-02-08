@@ -2,6 +2,7 @@ import { AuthorizationStatusEnum, useAuthorization } from '@entities/user';
 import { useEffect } from 'react';
 import { useAppDispatch } from '@shared/lib/redux';
 import { fetchMainQuestsListAction } from '@entities/quest';
+import { fetchBookingQuestsListAction } from '@features/booking-list';
 
 export const useStartup = () => {
   const { checkAuthorization, status } = useAuthorization();
@@ -33,7 +34,8 @@ export const useStartup = () => {
       const runListsFetch = async () => {
         if (!componentIsRendered) {
           await Promise.all([
-            status !== AuthorizationStatusEnum.Unknown ? dispatch(fetchMainQuestsListAction()) : Promise.resolve()
+            status !== AuthorizationStatusEnum.Unknown ? dispatch(fetchMainQuestsListAction()) : Promise.resolve(),
+            status === AuthorizationStatusEnum.Authorized ? dispatch(fetchBookingQuestsListAction()) : Promise.resolve()
           ]);
         }
       };

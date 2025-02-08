@@ -1,17 +1,20 @@
 import { Classed } from '@shared/model';
 import classNames from 'classnames';
-import { JSX } from 'react';
+import { JSX, PropsWithChildren, ReactNode } from 'react';
 
-type MessageBlockProps = Classed<{
-  message: string;
-}>
+type MessageBlockProps = Classed<PropsWithChildren<{
+  message: ReactNode;
+}>>
 
-export function MessageBlock({ message, className }: MessageBlockProps): JSX.Element {
-  const paragraphClassName = classNames('message-block', className);
+export function MessageBlock({ message, className, children }: MessageBlockProps): JSX.Element {
+  const paragraphClassName = classNames('message-block__paragraph', className);
 
   return (
-    <p className={paragraphClassName}>
-      {message}
-    </p>
+    <div className='message-block__container'>
+      <p className={paragraphClassName}>
+        {message}
+      </p>
+      {children}
+    </div>
   );
 }

@@ -12,23 +12,23 @@ type GlobalLoaderProps = {
   authorizationLoadingSelector: Selector;
   mainQuestsLoadingSelector: Selector;
   questExtendedLoadingSelector: Selector;
+  bookingListLoadingSelector: Selector;
 }
 
 export function GlobalLoader({
   className,
   authorizationLoadingSelector,
   mainQuestsLoadingSelector,
-  questExtendedLoadingSelector
+  questExtendedLoadingSelector,
+  bookingListLoadingSelector,
 }: GlobalLoaderProps): JSX.Element {
   const innerLoading = useAppSelector(globalLoaderSelector);
   const authLoading = useAppSelector(authorizationLoadingSelector);
   const mainLoading = useAppSelector(mainQuestsLoadingSelector);
   const questExtendedLoading = useAppSelector(questExtendedLoadingSelector);
-  /*const favoritesLoading = useAppSelector(favoritesOffersLoadingSelector);
-  const mainLoading = useAppSelector(mainOffersLoadingSelector);
-  const offerPageLoading = useAppSelector(offerPageLoadingSelector);*/
+  const bookingLoading = useAppSelector(bookingListLoadingSelector);
 
-  const loading = innerLoading || authLoading || mainLoading || questExtendedLoading;
+  const loading = innerLoading || authLoading || mainLoading || questExtendedLoading || bookingLoading;
 
   const loaderClassName = classNames(
     'loader-container',

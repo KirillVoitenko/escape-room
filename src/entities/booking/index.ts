@@ -1,10 +1,11 @@
 import { BookingDate } from './model';
+import { DATE_CAPTIONS } from './config';
+
 import type {
   NewBooking,
   QuestBookingInfo,
   QuestBookingSlot,
   UserBooking,
-  UserBookingQuestInfo
 } from './model';
 
 export {
@@ -13,5 +14,5 @@ export {
   QuestBookingInfo,
   QuestBookingSlot,
   UserBooking,
-  UserBookingQuestInfo
+  DATE_CAPTIONS
 };

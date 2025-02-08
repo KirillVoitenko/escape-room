@@ -1,4 +1,4 @@
-import { QuestType, type MapCoordinate, type QuestLevel } from '@shared/model';
+import type { MapCoordinate } from '@shared/model';
 
 type BookingLocation = {
   address: string;
@@ -34,17 +34,7 @@ export type NewBooking = {
   placeId: string;
 }
 
-export type UserBookingQuestInfo = {
-  id: string;
-  title: string;
-  previewImg: string;
-  previewImgWebp: string;
-  level: QuestLevel;
-  type: QuestType;
-  peopleMinMax: [number, number];
-}
-
-export type UserBooking = {
+export type UserBooking<TQuestType> = {
   date: BookingDate;
   time: string;
   contactPerson: string;
@@ -53,5 +43,5 @@ export type UserBooking = {
   peopleCount: number;
   id: string;
   location: BookingLocation;
-  quest: UserBookingQuestInfo;
+  quest: TQuestType;
 }

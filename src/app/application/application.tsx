@@ -12,6 +12,7 @@ import { useStartup } from '@app/startup';
 import { GlobalLoader } from '@shared/ui/global-loader';
 import { authorizationLoadingSelector } from '@entities/user';
 import { mainQuestsLoadingSelector, questExtendedLoadingSelector } from '@entities/quest';
+import { bookingLoadingSelector } from '@features/booking-list';
 
 export function Application(): JSX.Element {
   useStartup();
@@ -28,6 +29,7 @@ export function Application(): JSX.Element {
         authorizationLoadingSelector={authorizationLoadingSelector}
         mainQuestsLoadingSelector={mainQuestsLoadingSelector}
         questExtendedLoadingSelector={questExtendedLoadingSelector}
+        bookingListLoadingSelector={bookingLoadingSelector}
       />
       <RouterProvider />
     </>

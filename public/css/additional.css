@@ -42,7 +42,13 @@
   animation: rotate 1s linear infinite;
 }
 
-.message-block {
+.message-block__container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.message-block__paragraph {
   margin: 200px 0 0 0;
   padding: 0;
   width: 100%;

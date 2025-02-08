@@ -12,6 +12,7 @@ const MainPage = lazy(() => import('@pages/main-page'));
 const QuestDetailsPage = lazy(() => import('@pages/quest-details-page'));
 const AboutPage = lazy(() => import('@pages/about-page'));
 const QuestBookingPage = lazy(() => import('@pages/quest-booking-page'));
+const BookingsPage = lazy(() => import('@pages/bookings-page'));
 
 export function AppRoutes(): JSX.Element {
   const { status } = useAuthorization();
@@ -78,7 +79,9 @@ export function AppRoutes(): JSX.Element {
               isPrivate={status === AuthorizationStatusEnum.Authorized}
               redirectPath={RoutesEnum.Login}
             >
-              <p>User booked quests page</p>
+              <Suspense fallback={<Fallback />}>
+                <BookingsPage />
+              </Suspense>
             </PrivateRoute>
           }
         />

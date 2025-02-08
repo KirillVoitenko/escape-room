@@ -18,6 +18,8 @@ export const createValidationSchema = (minGamersCount: number, maxGamersCount: n
     .matches(/[0-9]{10,}/, DefaultErrorMessage.FormatError)
     .required(DefaultErrorMessage.FieldRequired),
   gamersCount: number()
+    .integer('Только целое число')
+    .typeError('Поле должно быть числом')
     .min(minGamersCount, `Минимальное число участников - ${minGamersCount}`)
     .max(maxGamersCount, `Максимальное число участников - ${maxGamersCount}`)
     .required(DefaultErrorMessage.FieldRequired),

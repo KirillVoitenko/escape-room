@@ -1,10 +1,12 @@
-import type { QuestBookingInfo } from '@entities/booking';
+import type { NewBooking, QuestBookingInfo } from '@entities/booking';
 import { QuestPreviewImage } from '@shared/ui/quest-preview-image';
-import { JSX, useState } from 'react';
+import { JSX, useCallback, useState } from 'react';
 import { PREVIEW_ATTRIBUTES } from '@pages/quest-booking-page/config';
 import { BookingMap } from '../booking-map';
 import { BookingForm } from '@features/booking-form';
 import { QuestExtended } from '@entities/quest';
+import { useAppDispatch } from '@shared/lib/redux';
+import { addNewBookingAction } from '@features/booking-list';
 
 type BookingDetailsProps = {
   details: QuestBookingInfo[];
@@ -13,8 +15,16 @@ type BookingDetailsProps = {
 
 export function BookingDetails({ details, quest }: BookingDetailsProps): JSX.Element {
   const [activeDetailId, setActiveDetailId] = useState<string>(details[0].id);
-
+  const dispatch = useAppDispatch();
   const activeDetail = details.find((current) => current.id === activeDetailId);
+
+  const bookingFormSubmitHandler = useCallback(
+    async (questId: string, booking: NewBooking): Promise<void> => {
+      await dispatch(addNewBookingAction({questId, booking}));
+    },
+    [dispatch]
+  );
+
   return (
     <>
       <div className='decorated-page__decor' aria-hidden>
@@ -40,7 +50,7 @@ export function BookingDetails({ details, quest }: BookingDetailsProps): JSX.Ele
             onBookingClick={setActiveDetailId}
           />
         )}
-        {activeDetail && <BookingForm booking={activeDetail} quest={quest} />}
+        {activeDetail && <BookingForm booking={activeDetail} quest={quest} onSubmit={bookingFormSubmitHandler} />}
       </div>
     </>
   );

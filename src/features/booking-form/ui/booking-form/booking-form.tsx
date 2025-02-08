@@ -5,7 +5,7 @@ import { TextInput } from '@shared/ui/text-input';
 import { INITIAL_FORM_VALUE } from '@features/booking-form/config';
 import { CustomCheckbox } from '@shared/ui/custom-checkbox';
 import { createValidationSchema } from '@features/booking-form/config';
-import { BookingDate, QuestBookingInfo } from '@entities/booking';
+import { BookingDate, NewBooking, QuestBookingInfo } from '@entities/booking';
 import { QuestExtended } from '@entities/quest';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { QuestTimeSlots } from '../quest-time-slots';
@@ -15,9 +15,10 @@ import { createNewBooking } from '@features/booking-form/lib/create-new-booking'
 type BookingFormProps = {
   booking: QuestBookingInfo;
   quest: QuestExtended;
+  onSubmit: (questId: string, booking: NewBooking) => Promise<void>;
 }
 
-export function BookingForm({ booking, quest }: BookingFormProps): JSX.Element {
+export function BookingForm({ booking, quest, onSubmit }: BookingFormProps): JSX.Element {
   const validationSchema = createValidationSchema(
     Math.min(...quest.peopleMinMax),
     Math.max(...quest.peopleMinMax)
@@ -48,8 +49,9 @@ export function BookingForm({ booking, quest }: BookingFormProps): JSX.Element {
     [quest.id, resetField]
   );
 
-  const formSubmitHandler = (data: BookingFormValue): void => {
-    console.log(createNewBooking(booking.id, data));
+  const formSubmitHandler = async (data: BookingFormValue): Promise<void> => {
+    const newBooking = createNewBooking(booking.id, data);
+    await onSubmit(quest.id, newBooking);
   };
 
   return (
@@ -117,7 +119,7 @@ export function BookingForm({ booking, quest }: BookingFormProps): JSX.Element {
           className='booking-form__input'
           hasError={!!errors?.gamersCount?.message}
           {...register('gamersCount', {
-            setValueAs: (value) => Number.isNaN(value) ? Number.parseInt(String(value), 10) : null
+            valueAsNumber: true
           })}
         >
           {!!errors?.gamersCount?.message && <span role='alert' className='error__message'>{errors.gamersCount.message}</span>}

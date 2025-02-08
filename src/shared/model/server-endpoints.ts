@@ -3,5 +3,7 @@ export enum ServerEndpoints {
   Logout = '/logout',
   Quests = '/quest',
   QuestExtended = '/quest/:questId',
-  QuestBookings = '/quest/:questId/booking'
+  QuestBookings = '/quest/:questId/booking',
+  UserBookings = '/reservation',
+  Booking = '/reservation/:reservationId'
 }
